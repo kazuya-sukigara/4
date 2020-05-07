@@ -6,6 +6,7 @@
 
 <h2>User info</h2>
 <%= render 'users/profile', user: @user %>
+<%= render 'relationships/follow_button', user: @user, relotionship: @relationship %>
 <!--同コントローラーのviewで表示ならusersは省略可 -->
 
 <h2>New book</h2>
@@ -62,19 +63,6 @@
 	</tbody>
 </table>
 
-<% unless current_user == @user %>
-  <% if current_user.following?(user) %>
-    <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
-      <%= hidden_field_tag :follow_id, user.id %>
-      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
-    <% end %>
-  <% else %>
-    <%= form_for(current_user.relationships.build) do |f| %>
-      <%= hidden_field_tag :follow_id, user.id %>
-      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
-    <% end %>
-  <% end %>
-<% end %>
 
 </div>
 </div>

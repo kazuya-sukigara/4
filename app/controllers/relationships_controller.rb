@@ -26,7 +26,15 @@ class RelationshipsController < ApplicationController
   end
 
   private
-  def
+  def set_user
+    # params = {
+    #   relationship: {
+    #     follow_id: 1
+    #   }
+    # }
+    # params = {
+    #   follow_id: 1
+    # }
     @user = User.find(params[:relationship][:follow_id])
   end
 

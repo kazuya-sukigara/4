@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    # @relationship = @user.relationships.build
   	@books = @user.books
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
     @book_comment = BookComment.new
@@ -29,6 +30,18 @@ class UsersController < ApplicationController
       flash[:error_messages] = @user.errors.full_messages
   		render "edit"
   	end
+  end
+
+  def following
+      @user  = User.find(params[:id])
+      @users = @user.followings
+      render 'show_follow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
   end
 
   private
